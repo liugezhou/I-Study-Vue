@@ -2,37 +2,31 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Vue监测数据改变的原理</title>
+		<title>v-pre指令</title>
 		<!-- 引入Vue -->
 		<script type="text/javascript" src="../js/vue.js"></script>
 	</head>
 	<body>
+		<!-- 
+			v-pre指令：
+					1.跳过其所在节点的编译过程。
+					2.可利用它跳过：没有使用指令语法、没有使用插值语法的节点，会加快编译。
+		-->
 		<!-- 准备好一个容器-->
 		<div id="root">
-			<h2>名字：{{name}}</h2>
-			<h2>年纪：{{age}}</h2>
+			<h2 v-pre>Vue其实很简单</h2>
+			<h2 v-pre>当前的n值是:{{n}}</h2>
+			<button  @click="n++">点我n+1</button>
 		</div>
 	</body>
 
 	<script type="text/javascript">
 		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
 
-		const vm = new Vue({
+		new Vue({
 			el:'#root',
 			data:{
-				name:'Tom',
-				age:18,
-				student:{
-					name:'tom',
-					age:{
-						rAge:40,
-						sAge:29,
-					},
-					friends:[
-						{name:'jerry',age:35},
-						{name:'jerry',age:35}
-					]
-				}
+				n:1
 			}
 		})
 	</script>

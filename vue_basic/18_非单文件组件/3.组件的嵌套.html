@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>组件的嵌套</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root">
+			
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+
+		//定义child组件
+		const child = Vue.extend({
+			name:'child',
+			template:`
+				<div>
+					<h2>User：{{name}}</h2>	
+					<h2>Age：{{age}}</h2>	
+				</div>
+			`,
+			data(){
+				return {
+					name:'Child',
+					age:18
+				}
+			}
+		})
+		
+		//定义Parent组件
+		const parent = Vue.extend({
+			name:'parent',
+			template:`
+				<div>
+					<h2>User：{{name}}</h2>	
+					<h2>Age：{{age}}</h2>	
+					<child></child>
+				</div>
+			`,
+			data(){
+				return {
+					name:'Parent',
+					age:'18'
+				}
+			},
+			//注册组件（局部）
+			components:{
+				child
+			}
+		})
+
+		//定义hello组件
+		const hello = Vue.extend({
+			template:`<h1>{{msg}}</h1>`,
+			data(){
+				return {
+					msg:'Hello 组件'
+				}
+			}
+		})
+		
+		//定义app组件
+		const app = Vue.extend({
+			template:`
+				<div>	
+					<hello></hello>
+					<parent></parent>
+				</div>
+			`,
+			components:{
+				parent,
+				hello
+			}
+		})
+
+		//创建vm
+		new Vue({
+			template:'<app></app>',
+			el:'#root',
+			//注册组件（局部）
+			components:{app}
+		})
+	</script>
+</html>

@@ -19,10 +19,3 @@
 		}
 	}
 </script>
-<style lang="less">
-	.demo{
-		.test{
-			color:red;
-		}
-	}
-</style>

@@ -1,22 +1,22 @@
 <template>
 	<div class="demo">
-		<h2 class="test">Boy:{{name}}</h2>
+		<h2>Girl:{{name}}</h2>
 	</div>
 </template>
 
 <script>
 	export default {
-		name:'Boy',
+		name:'Girl',
 		data() {
 			return {
-				name:'TomA'
+				name:'Lan'
 			}
-		},
+		}
 	}
 </script>
 
 <style scoped>
 	.demo{
-		background-color: skyblue;
+		background-color: palegoldenrod;
 	}
 </style>

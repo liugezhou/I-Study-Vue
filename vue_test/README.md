@@ -114,20 +114,33 @@
 2. 写法：```<style scoped>```
 
 ## 总结TodoList案例
-
 1. 组件化编码流程：
     ​	(1).拆分静态组件：组件要按照功能点拆分，命名不要与html元素冲突。
     ​	(2).实现动态组件：考虑好数据的存放位置，数据是一个组件在用，还是一些组件在用：
     ​			1).一个组件在用：放在组件自身即可。
     ​			2). 一些组件在用：放在他们共同的父组件上（<span style="color:red">状态提升</span>）。
     ​	(3).实现交互：从绑定事件开始。
-
 2. props适用于：
-
     ​	(1).父组件 ==> 子组件 通信
-
     ​	(2).子组件 ==> 父组件 通信（要求父先给子一个函数）
-
 3. 使用v-model时要切记：v-model绑定的值不能是props传过来的值，因为props是不可以修改的！
-
 4. props传过来的若是对象类型的值，修改对象中的属性时Vue不会报错，但不推荐这样做。
+
+## 组件的自定义事件
+1. 一种组件间通信的方式，适用于：<strong style="color:red">子组件 ===> 父组件</strong>  
+2. 使用场景：A是父组件，B是子组件，B想给A传数据，那么就要在A中给B绑定自定义事件（<span style="color:red">事件的回调在A中</span>）。
+3. 绑定自定义事件： 
+    1. 第一种方式，在父组件中：```<Demo @myevent="test"/>```  或 ```<Demo v-on:myevent="test"/>```      
+    2. 第二种方式，在父组件中： 
+        ```js
+        <Demo ref="demo"/>
+        ......
+        mounted(){
+           this.$refs.xxx.$on('myevent',this.test)
+        }
+        ```
+    3. 若想让自定义事件只能触发一次，可以使用```once```修饰符，或```$once```方法。  
+    4. 触发自定义事件：```this.$emit('myevent',数据)```	    	
+    5. 解绑自定义事件```this.$off('myevent')``` 
+    6. 组件上也可以绑定原生DOM事件，需要使用```native```修饰符。    
+    7. 注意：通过```this.$refs.xxx.$on('myevent',回调)```绑定自定义事件时，回调<span style="color:red">要么配置在methods中</span>，<span style="color:red">要么用箭头函数</span>，否则this指向会出问题！

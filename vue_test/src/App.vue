@@ -20,7 +20,6 @@
 		components:{MyHeader,MyList,MyFooter},
 		data() {
 			return {
-				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）
 				todos:JSON.parse(localStorage.getItem('todos')) ||[]
 			}
 		},
@@ -51,7 +50,15 @@
 					return !todo.done
 				})
 			}
-		}
+		},
+		watch: {
+			todos:{
+				deep:true,
+				handler(value){
+					localStorage.setItem('todos',JSON.stringify(value))
+				}
+			}
+		},
 	}
 </script>
 

@@ -20,7 +20,7 @@
 				//校验数据
 				if(!this.title.trim()) return alert('输入不能为空')
 				//将用户的输入包装成一个todo对象
-				const todoObj = {id:nanoid(),title:this.title,done:false,editStatus:false}
+				const todoObj = {id:nanoid(),title:this.title,done:false}
 				//通知App组件去添加一个todo对象
 				this.$emit('addTodo',todoObj)
 				//清空输入

@@ -56,15 +56,9 @@
 					return !todo.done
 				})
 			},
-			editTodo(id){
-				this.todos.forEach((todo)=>{
-					if(todo.id === id) todo.editStatus = !todo.editStatus
-				})
-			},
 			updateTodo(id,val){
 				this.todos.forEach((todo)=>{
 					if(todo.id === id) {
-						todo.editStatus = !todo.editStatus
 						todo.title = val
 					}
 				})

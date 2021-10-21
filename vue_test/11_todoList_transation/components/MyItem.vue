@@ -1,5 +1,5 @@
 <template>
-  <li>
+    <li>
     <label>
       <input
         type="checkbox"
@@ -8,20 +8,20 @@
       />
       <!-- 如下代码也能实现功能，但是不太推荐，因为有点违反原则，因为修改了props -->
       <!-- <input type="checkbox" v-model="todo.done"/> -->
-      <span v-show="!todo.editStatus">{{ todo.title }}</span>
-      <span v-show="todo.editStatus">
-				<input type="text" v-model="editValue" @blur="handleSave(todo.id)" ref="inputTitle"/>
+      <span v-show="!todo.isEdit">{{ todo.title }}</span>
+      <span v-show="todo.isEdit">
+				<input type="text" v-model="editValue" @blur="handleSave(todo,$event)" ref="inputTitle"/>
 			</span>
     </label>
     <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
     <button
       class="btn btn-info"
-      @click="handleEdit(todo.id)"
-      v-show="!todo.editStatus"
+      @click="handleEdit(todo)"
+      v-show="!todo.isEdit"
     >
       编辑
     </button>
-    <button class="btn btn-info" @click="handleSave(todo.id)" v-show="todo.editStatus">
+    <button class="btn btn-info" @click="handleSave(todo,$event)" v-show="todo.isEdit">
       保存
     </button>
   </li>
@@ -52,17 +52,21 @@ export default {
         this.$bus.$emit("deleteTodo", id);
       }
     },
-    handleEdit(id) {
-      this.$bus.$emit("editTodo", id);
+    handleEdit(todo) {
+      if(todo.hasOwnProperty('isEdit')){
+					todo.isEdit = true
+				}else{
+					// console.log('@')
+					this.$set(todo,'isEdit',true)
+				}
 			this.$nextTick(function(){
 				this.$refs.inputTitle.focus()
 			})
     },
-    handleSave(id) {
-			if(this.editValue ===''){
-				alert('输入为空！')
-			}
-      this.$bus.$emit("updateTodo", id, this.editValue);
+    handleSave(todo,e) {
+			todo.isEdit = false
+			if(!e.target.value.trim()) return alert('输入不能为空！')
+      this.$bus.$emit("updateTodo", todo.id, e.target.value);
     },
   },
 };
@@ -111,4 +115,5 @@ li:hover {
 li:hover button {
   display: block;
 }
+
 </style>

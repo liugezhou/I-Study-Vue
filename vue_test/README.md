@@ -915,7 +915,7 @@ module.exports = {
    router.beforeEach((to,from,next)=>{
    	console.log('beforeEach',to,from)
    	if(to.meta.isAuth){ //判断当前路由是否需要进行权限控制
-   		if(localStorage.getItem('school') === 'atguigu'){ //权限控制的具体规则
+   		if(localStorage.getItem('name') === 'tom'){ //权限控制的具体规则
    			next() //放行
    		}else{
    			alert('暂无权限查看')
@@ -932,7 +932,7 @@ module.exports = {
    	if(to.meta.title){ 
    		document.title = to.meta.title //修改网页的title
    	}else{
-   		document.title = 'vue_test'
+   		document.title = 'liugezhou'
    	}
    })
    ```
@@ -967,8 +967,6 @@ module.exports = {
    ```
 
 ### 13.路由器的两种工作模式
-
-
 
 1. 对于一个url来说，什么是hash值？—— #及其后面的内容就是hash值。
 2. hash值不会包含在 HTTP 请求中，即：hash值不会带给服务器。

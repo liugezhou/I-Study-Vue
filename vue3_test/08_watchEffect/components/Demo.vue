@@ -15,14 +15,14 @@
 </template>
 
 <script>
-import { ref, watch, reactive } from "vue";
+import { ref, watch, reactive,watchEffect } from "vue";
 export default {
   name: "Demo",
   setup() {
     //数据
     let sum = ref(0);
     let msg = ref("你好啊");
-    let person = ref({
+    let person = reactive({
       name: "Tom",
       age: 18,
       job: {
@@ -32,23 +32,20 @@ export default {
       },
     });
 
-    console.log(person);
-    watch(sum, (n, o) => {
-      console.log("sum changed", n, o);
-    });
-    //监视的是Reflmpl中的value
-    // watch(person.value, (n, o) => {
-    //   console.log("person changed", n, o);
-    // });
+    // watch(
+    //   sum,
+    //   (n, o) => {
+    //     console.log("sum changed", n, o);
+    //   },
+    //   { deep: true, immediate: true }
+    // );
 
-    //OR
-    watch(
-      person,
-      (n, o) => {
-        console.log("person changed", n, o);
-      },
-      { deep: true }
-    );
+    watchEffect(()=>{
+      const x1 = sum.value
+      const x2 = person.job.j1.salary
+      console.log('watchEffect(所指定的回调执行力了！)')
+      
+    })
     return {
       sum,
       msg,

@@ -145,7 +145,7 @@
     6. 组件上也可以绑定原生DOM事件，需要使用```native```修饰符。    
     7. 注意：通过```this.$refs.xxx.$on('myevent',回调)```绑定自定义事件时，回调<span style="color:red">要么配置在methods中</span>，<span style="color:red">要么用箭头函数</span>，否则this指向会出问题！
 
-    ## 全局事件总线（GlobalEventBus）
+## 全局事件总线（GlobalEventBus）
     
     1. 一种组件间通信的方式，适用于<span style="color:red">任意组件间通信</span>。  
     
@@ -174,9 +174,10 @@
        2. 提供数据：```this.$bus.$emit('xxxx',数据)```  
     4. 最好在beforeDestroy钩子中，用$off去解绑<span style="color:red">当前组件所用到的</span>事件。
 
-    ## 消息订阅与发布（pubsub）
 
-1.一种组件间通信的方式，适用于<span style="color:red">任意组件间通信</span>。
+## 消息订阅与发布（pubsub）
+
+1. 一种组件间通信的方式，适用于<span style="color:red">任意组件间通信</span>。
 2. 使用步骤：
    1. 安装pubsub：```npm i pubsub-js```
    2. 引入: ```import pubsub from 'pubsub-js'```
@@ -193,7 +194,7 @@
    4. 提供数据：```pubsub.publish('xxx',数据)```
    5. 最好在beforeDestroy钩子中，用```pubsub.unsubscribe(pid)```去<span style="color:red">取消订阅。</span>
 	
-    ## nextTick
+ ## nextTick
 
 1. 语法：```this.$nextTick(回调函数)```
 2. 作用：在下一次 DOM 更新结束后执行其指定的回调。
@@ -603,7 +604,8 @@ module.exports = {
    //方式二：借助mapMutations：
    ...mapMutations('countAbout',{increment:'JIA',decrement:'JIAN'}),
    ```
- ## 路由
+
+## 路由
 
 1. 理解： 一个路由（route）就是一组映射关系（key - value），多个路由需要路由器（router）进行管理。
 2. 前端路由：key是路径，value是组件。
